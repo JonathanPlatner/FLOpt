@@ -1,0 +1,7 @@
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\bin\Debug\Flopt.exe.config
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\bin\Debug\Flopt.exe
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\bin\Debug\Flopt.pdb
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\obj\Debug\Flopt.csprojResolveAssemblyReference.cache
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\obj\Debug\Flopt.csproj.CoreCompileInputs.cache
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\obj\Debug\Flopt.exe
+C:\Users\jonathan.platner\Desktop\Flopt\Flopt\obj\Debug\Flopt.pdb
