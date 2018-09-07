@@ -10,31 +10,20 @@ namespace Flopt
     {
         static void Main(string[] args)
         {
-            Model.Del thing = Write;
-            Model.DoAThing(thing);
-            Airfoil af = new Airfoil(0.08f, 0.01f, 0.5f, -0.006f, 0.9f);
-            Matrix mat = new Matrix(4, 4, new float[] { 1, 1, 4, 1, 2, 1, 5, 5, 3, 7, 1, 0, 0, 2, 0, 1 });
-            string[] disp = mat.Invert().Display();
-            //for(int i = 0; i < disp.Length; i++)
-            //{
-            //    Console.WriteLine(disp[i]);
-            //}
+            Model aeroModel = new Model(Analysis.AeroSample, new float[] { 0.05f,-0.03f,-0.005f,0.5f,0.075f,0,4}, new float[] { 0.3f, 0.05f, 0.01f, 5, 1, 1, 20 });
+            aeroModel.Build();
+            //float result = Model.SampleSpace(Analysis.AeroSample, new float[] {0.1f,0.02f,0,1,0.23f,0.65f,5 });
+            Airfoil af = new Airfoil(0.08f, 0.01f, 0.4f, -0.006f, 0.7f);
 
             Wing wing = new Wing(0.3f, 0.07f, 0.5f, 15, 0, af);
             float ReynoldsNumber = wing.MeanAerodynamicChord * 3 * Environment.AirDensity / Environment.Viscosity(300);
-            float Volume = wing.Volume;
-            float Area = af.Area;
             Console.ReadLine();
-            XFoil.Query("jptemp.dat", 0.3f, ReynoldsNumber, 0.1f);
 
             Airframe airframe = new Airframe(wing);
             Analysis.Drag(airframe, 10);
             Console.WriteLine("Total Weight: " + airframe.Weight.ToString());
             Console.ReadLine();
         }
-        public static void Write()
-        {
-            Console.Write("Stuff");
-        }
+
     }
 }

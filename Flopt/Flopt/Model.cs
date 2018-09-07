@@ -8,16 +8,41 @@ namespace Flopt
 {
     class Model
     {
-        public delegate void Del();
+        public delegate float Sample(float[] inputs);
+        private Sample _sampleFunction;
         private int _numSamples;
-        public Model(int numVars)
+        private float[] _lowerBounds;
+        private float[] _upperBounds;
+        private float[][] _x;
+        private float[] _y;
+        public Model(Sample sampleFunction,float[] lowerBounds, float[] upperBounds)
         {
-            _numSamples = 1 + 2 * numVars + (numVars - 1) * (numVars) / 2;
+            _sampleFunction = sampleFunction;
+            _numSamples = (lowerBounds.Length + 2) * (lowerBounds.Length + 1) / 2;
+            _lowerBounds = lowerBounds;
+            _upperBounds = upperBounds;
+            _x = new float[_numSamples][];
+            _y = new float[_numSamples];
+            for (int i = 0; i < _numSamples; i++)
+            {
+                _x[i] = new float[_lowerBounds.Length];
+                for (int j = 0; j < _lowerBounds.Length; j++)
+                {
+                    _x[i][j] = _lowerBounds[j] + (_upperBounds[j] - _lowerBounds[j]) * i / (_numSamples - 1);
+                }
+            }
         }
 
-        public static void DoAThing(Del del)
+        public void Build()
         {
-            del();
+            for (int i = 0; i < _numSamples; i++)
+            {
+                _y[i] = SampleSpace(_sampleFunction, _x[i]);
+            }
+        }
+        public float SampleSpace(Sample sample,float[] inputs)
+        {
+            return sample(inputs);
         }
     }
 }
